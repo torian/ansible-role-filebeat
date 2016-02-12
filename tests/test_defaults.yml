@@ -1,0 +1,8 @@
+---
+- hosts: localhost
+  remote_user: root
+
+  roles:
+    - ansible-role-filebeat
+
+# vi:ts=2:sw=2:et:ft=yaml
