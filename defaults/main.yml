@@ -1,0 +1,24 @@
+---
+
+# Filebeat user and group
+#
+fbeat_user:  filebeat
+fbeat_group: filebeat
+
+
+# Filebeat version to use
+# 
+fbeat_version: 1.1.1
+
+
+# Filebeat version upgrade
+#  This options allows package upgrades. 
+#  Make sure you know what this implies.
+fbeat_upgrade: false
+
+
+# Installation directory
+fbeat_install_dir: "/usr/share/elasticsearch"
+
+
+# vi:ts=2:sw=2:et:ft=yaml

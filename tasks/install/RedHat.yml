@@ -1,0 +1,19 @@
+---
+
+- name: FileBeat Yum Repository
+  copy:
+    dest="/etc/yum.repos.d/filebeat-{{fbeat_version}}.repo"
+    content="{{fbeat_repository}}"
+    owner="root"
+    group="root"
+    mode="0644"
+
+- name: Install FileBeat (RedHat)
+  yum:
+    state="{{ (fbeat_upgrade) | ternary('latest', 'present') }}"
+    name="{{item}}"
+    update_cache=yes
+  with_items: fbeat_packages
+  notify: filebeat restart
+
+# vi:ts=2:sw=2:et:ft=yaml
