@@ -20,6 +20,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     ubuntu.vm.provision 'ansible' do |ansible| 
       ansible.playbook = 'tests/test_vagrant.yml'
+      ansible.extra_vars = {
+        fbeat_user:  'root',
+        fbeat_group: 'root',
+        fbeat_create_user: false,
+      }
     end
     
   end
