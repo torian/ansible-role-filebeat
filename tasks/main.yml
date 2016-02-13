@@ -8,4 +8,8 @@
   sudo: true
   tags: fbeat_install
 
+- include: config.yml
+  sudo: true
+  tags: fbeat_config
+
 # vi:ts=2:sw=2:et:ft=yaml
