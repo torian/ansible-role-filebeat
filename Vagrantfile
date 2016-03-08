@@ -74,6 +74,8 @@ gpgcheck = 0
 
     centos.vm.provision 'ansible' do |ansible| 
       ansible.playbook = 'tests/test_vagrant.yml'
+      #ansible.extra_vars = {
+      #}
     end
   end
 

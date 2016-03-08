@@ -12,4 +12,9 @@
   sudo: true
   tags: fbeat_config
 
+- service:
+    name:    "{{fbeat_service}}"
+    enabled: yes
+  when: fbeat_start_at_boot
+
 # vi:ts=2:sw=2:et:ft=yaml
