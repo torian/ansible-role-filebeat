@@ -21,9 +21,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     ubuntu.vm.provision 'ansible' do |ansible| 
       ansible.playbook = 'tests/test_vagrant.yml'
       ansible.extra_vars = {
-        fbeat_user:  'root',
-        fbeat_group: 'root',
-        fbeat_create_user: false,
+        filebeat_user:  'root',
+        filebeat_group: 'root',
+        filebeat_create_user: false,
       }
     end
     
@@ -49,8 +49,11 @@ gpgcheck = 0
 
     centos.vm.provision 'ansible' do |ansible| 
       ansible.playbook   = 'tests/test_vagrant.yml'
-      #ansible.extra_vars = {
-      #}
+      ansible.extra_vars = {
+        filebeat_user:  'root',
+        filebeat_group: 'root',
+        filebeat_create_user: false,
+      }
     end
   end
 
@@ -63,7 +66,7 @@ enabled  = 1
 gpgcheck = 0
 '''
 
-    centos.vm.box      = 'puppetlabs/centos-7.0-64-nocm'
+    centos.vm.box      = 'centos/7'
     centos.vm.hostname = 'centos'
 
     centos.vm.provision 'shell', inline: 'yum install -y ca-certificates'
@@ -74,8 +77,11 @@ gpgcheck = 0
 
     centos.vm.provision 'ansible' do |ansible| 
       ansible.playbook = 'tests/test_vagrant.yml'
-      #ansible.extra_vars = {
-      #}
+      ansible.extra_vars = {
+        filebeat_user:  'root',
+        filebeat_group: 'root',
+        filebeat_create_user: false,
+      }
     end
   end
 
