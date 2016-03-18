@@ -6,9 +6,9 @@ FIXME
 
 ## Tested On
 
-  * Debian (Jessie)
+  * EL / Centos (6 / 7)
+  * Debian (Wheezy / Jessie)
   * Ubuntu (Trusty)
-  * Centos (6 / 7)
 
 ## Defaults
 
