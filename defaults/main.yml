@@ -4,8 +4,8 @@
 #  WARNING: If you run filebeat with a user other than root make sure
 #  your logs are readable by the filebeat user. Add the filebeat user
 #  to a privileged group, with access to your logs (adm)
-filebeat_user:  filebeat
-filebeat_group: filebeat
+filebeat_user:  root
+filebeat_group: root
 
 # Create the filebeat user and group
 filebeat_create_user: true
