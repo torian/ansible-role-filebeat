@@ -6,15 +6,15 @@
 
 - include: install.yml
   sudo: true
-  tags: fbeat_install
+  tags: filebeat_install
 
 - include: config.yml
   sudo: true
-  tags: fbeat_config
+  tags: filebeat_config
 
 - service:
-    name:    "{{fbeat_service}}"
+    name:    filebeat
     enabled: yes
-  when: fbeat_start_at_boot
+  when: filebeat_start_at_boot
 
 # vi:ts=2:sw=2:et:ft=yaml

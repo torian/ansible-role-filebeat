@@ -3,19 +3,19 @@
 - name: Elastic APT Key
   apt_key: 
     state=present
-    url="{{fbeat_apt_key}}"
+    url="{{filebeat_apt_key}}"
 
 - name : FileBeat APT Repository
   apt_repository:
     state=present
-    repo="deb {{fbeat_apt_repository}} stable main"
+    repo="deb {{filebeat_apt_repository}} stable main"
     update_cache=yes
 
 - name: Install FileBeat (Debian)
   apt:
-    state="{{ (fbeat_upgrade) | ternary('latest', 'present') }}"
+    state="{{ (filebeat_upgrade) | ternary('latest', 'present') }}"
     name="{{item}}"
-  with_items: fbeat_packages
+  with_items: filebeat_packages
   notify: filebeat restart
 
 # vi:ts=2:sw=2:et:ft=yaml

@@ -4,73 +4,73 @@
 #  WARNING: If you run filebeat with a user other than root make sure
 #  your logs are readable by the filebeat user. Add the filebeat user
 #  to a privileged group, with access to your logs (adm)
-fbeat_user:  filebeat
-fbeat_group: filebeat
+filebeat_user:  filebeat
+filebeat_group: filebeat
 
 # Create the filebeat user and group
-fbeat_create_user: true
+filebeat_create_user: true
 
 # Filebeat version to use
 # 
-fbeat_version: 1.1.1
+filebeat_version: 1.1.1
 
 # Start filebeat at boot time
 #
-fbeat_start_at_boot: True
+filebeat_start_at_boot: True
 
 # Filebeat version upgrade
 #  This options allows package upgrades. 
 #  Make sure you know what this implies.
-fbeat_upgrade: false
+filebeat_upgrade: false
 
-fbeat_config_file: /etc/filebeat/filebeat.yml
+filebeat_config_file: /etc/filebeat/filebeat.yml
 
-fbeat_config_registry_file: /var/lib/filebeat/registry
+filebeat_config_registry_file: /var/lib/filebeat/registry
 
 # Filebeat configuration
-#  The configuratlion is built based on a single variable, in YAML format, fbeat_config.
+#  The configuratlion is built based on a single variable, in YAML format, filebeat_config.
 #  Just for fun and example, it has been splitted into multiple vars:
 #
-#   - fbeat_config_prospectors
-#   - fbeat_config_output
-#   - fbeat_config_shipper
-#   - fbeat_config_logging
+#   - filebeat_config_prospectors
+#   - filebeat_config_output
+#   - filebeat_config_shipper
+#   - filebeat_config_logging
 #
 
-fbeat_config_prospectors: |
+filebeat_config_prospectors: |
   filebeat:
     prospectors:
       -
         input_type: log
         paths:
           - /var/log/*.log
-        registry_file: "{{fbeat_config_registry_file}}"
+        registry_file: "{{filebeat_config_registry_file}}"
 
 
-fbeat_config_output: |
+filebeat_config_output: |
   output:
     elasticsearch:
       hosts: [ 'localhost:9200' ]
 
 
-fbeat_config_shipper: |
+filebeat_config_shipper: |
   shipper:
 
 
-fbeat_config_logging: |
+filebeat_config_logging: |
   logging:
     files:
       rotateeverybytes: 10485760 # = 10MB
 
 
-fbeat_config: |
-  {{fbeat_config_prospectors}}
+filebeat_config: |
+  {{filebeat_config_prospectors}}
 
-  {{fbeat_config_output}}
+  {{filebeat_config_output}}
 
-  {{fbeat_config_shipper}}
+  {{filebeat_config_shipper}}
 
-  {{fbeat_config_logging}}
+  {{filebeat_config_logging}}
 
 
 # vi:ts=2:sw=2:et:ft=yaml
