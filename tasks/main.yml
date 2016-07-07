@@ -13,7 +13,7 @@
   tags: filebeat_config
 
 - service:
-    name:    filebeat
+    name: filebeat
     enabled: yes
   when: filebeat_start_at_boot
 
