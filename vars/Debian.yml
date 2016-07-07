@@ -8,6 +8,7 @@ filebeat_repo_version:   "{{filebeat_v_major}}.{{ ((filebeat_v_major|int) > 1) |
 
 filebeat_apt_key: https://packages.elastic.co/GPG-KEY-elasticsearch
 filebeat_apt_repository: "https://packages.elastic.co/beats/apt"
+filebeat_deb_baseurl: "https://download.elastic.co/beats/filebeat"
 
 filebeat_packages:
   - filebeat
