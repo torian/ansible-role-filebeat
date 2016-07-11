@@ -27,11 +27,4 @@
     creates: /opt/filebeat/service.created
   when: filebeat_start_at_boot
 
-- name: filebeat | Ensure service is running
-  service:
-    name: filebeat
-    state: started
-  when: filebeat_start_at_boot
-
-
 # vi:ts=2:sw=2:et:ft=yaml
