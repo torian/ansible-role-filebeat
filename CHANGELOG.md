@@ -1,5 +1,8 @@
 # Changelog
 
+## 2016-07-11: 0.2.0
+  - Support for Solaris (@kireevco)
+
 ## 2016-07-08: 0.1.1
   - Update CHANGELOG typos :)
   - Add documentation!
