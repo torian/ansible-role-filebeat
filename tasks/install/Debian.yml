@@ -5,19 +5,19 @@
     state=present
     url="{{filebeat_apt_key}}"
 
-- block:
-  - name : FileBeat APT Repository
-    apt_repository:
-      state=present
-      repo="deb {{filebeat_apt_repository}} stable main"
-      update_cache=yes
+- name : FileBeat APT Repository
+  apt_repository:
+    state=present
+    repo="deb {{filebeat_apt_repository}} stable main"
+    update_cache=yes
+  when: filebeat_use_apt_repo
   
-  - name: Install FileBeat (Debian)
-    apt:
-      state="{{ (filebeat_upgrade) | ternary('latest', 'present') }}"
-      name="{{item}}"
-    with_items: "{{ filebeat_packages }}"
-    notify: filebeat restart
+- name: Install FileBeat (Debian)
+  apt:
+    state="{{ (filebeat_upgrade) | ternary('latest', 'present') }}"
+    name="{{item}}"
+  with_items: "{{ filebeat_packages }}"
+  notify: filebeat restart
   when: filebeat_use_apt_repo
 
 - name: Install FileBeat from URL
