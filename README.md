@@ -35,12 +35,14 @@ FileBeat version to use.
 
     filebeat_version: 1.1.1
 
-On Debian based Systems you may use a URL to install a specific .deb
-To do so set 
+Make use of the FileBeat apt repo.
+On Debian-based systems, you may use a URL to install a specific `.deb`.
+To do so, change `filebeat_use_apt_repo` value to `false`, then (optionally)
+adjust the value of `filebeat_deb_baseurl` (which has a default value set for you).
 
-    filebeat_use_apt_repo: false (default true)
+    filebeat_use_apt_repo: true
 
-The following deb base url is set by default:
+FileBeat `.deb` base URL for package download if `filebeat_use_apt_repo: false`
 
     filebeat_deb_baseurl: "https://download.elastic.co/beats/filebeat"
 
