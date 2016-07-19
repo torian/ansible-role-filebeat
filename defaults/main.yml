@@ -79,5 +79,8 @@ filebeat_config: |
 
 filebeat_use_apt_repo: True
 
+# List of template files to copy 
+filebeat_templates: []
+
 # vi:ts=2:sw=2:et:ft=yaml
 

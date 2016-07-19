@@ -98,6 +98,10 @@ filebeat_config: |
   {{filebeat_config_logging}}
 ```
 
+FileBeat templates (a list of templates to install).
+
+    filebeat_templates: []
+
 ## Usage
 ```yaml
     - hosts: logging
