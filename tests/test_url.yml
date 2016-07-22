@@ -1,0 +1,15 @@
+---
+- hosts: localhost
+  remote_user: root
+
+  vars:
+    - fbeat_user:  root
+    - fbeat_group: root
+    - filebeat_use_apt_repo: false
+    - filebeat_version: 5.0.0-alpha4
+    - filebeat_deb_baseurl: 'https://download.elastic.co/beats/filebeat'
+
+  roles:
+    - ansible-role-filebeat
+
+# vi:ts=2:sw=2:et:ft=yaml
