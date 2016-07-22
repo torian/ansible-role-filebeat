@@ -1,5 +1,21 @@
 VAGRANTFILE_API_VERSION = '2'
 
+EPEL_REPO_6 = '''
+[epel]
+name     = EPEL 6 - \$basearch
+baseurl  = http://mirror.globo.com/epel/6/\$basearch
+enabled  = 1
+gpgcheck = 0
+'''
+
+EPEL_REPO_7 = '''
+[epel]
+name     = EPEL 7 - \$basearch
+baseurl  = http://mirror.globo.com/epel/7/\$basearch
+enabled  = 1
+gpgcheck = 0
+'''
+
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.provider :virtualbox do |vb|
@@ -15,8 +31,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     ubuntu.vm.hostname = 'ubuntu'
     
     ubuntu.vm.provision 'shell', inline: 'apt-get update'
-    ubuntu.vm.provision 'shell', inline: 'apt-get install -y -qq  python-pip'
-    ubuntu.vm.provision 'shell', inline: 'pip install ansible jinja2'
+    ubuntu.vm.provision 'shell', inline: 'apt-get install -y -qq  python-pip libffi-dev libssl-dev python-dev'
+    ubuntu.vm.provision 'shell', inline: 'pip install ansible==1.9.4 jinja2'
 
     ubuntu.vm.provision 'ansible' do |ansible| 
       ansible.playbook = 'tests/test_vagrant.yml'
@@ -29,25 +45,17 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     
   end
 
-  config.vm.define 'centos-6' do |centos|
-    EPEL_REPO = '''
-[epel]
-name     = EPEL 6 - \$basearch
-baseurl  = http://mirror.globo.com/epel/6/\$basearch
-enabled  = 1
-gpgcheck = 0
-'''
+  config.vm.define 'centos-6' do |centos6|
+    centos6.vm.box      = "puppetlabs/centos-6.6-64-nocm"
+    centos6.vm.hostname = 'centos-6'
 
-    centos.vm.box      = "puppetlabs/centos-6.6-64-nocm"
-    centos.vm.hostname = 'centos'
+    centos6.vm.provision 'shell', inline: 'yum install -y ca-certificates'
+    centos6.vm.provision 'shell', inline: "echo \"#{EPEL_REPO_6}\" > /etc/yum.repos.d/epel.repo"
+    centos6.vm.provision 'shell', inline: 'yum install -y python-pip python-devel gcc libffi-devel openssl-devel'
+    centos6.vm.provision 'shell', inline: 'pip install -q pip --upgrade'
+    centos6.vm.provision 'shell', inline: 'pip install -q ansible==1.9.4 jinja2'
 
-    centos.vm.provision 'shell', inline: 'yum install -y ca-certificates'
-    centos.vm.provision 'shell', inline: "echo \"#{EPEL_REPO}\" > /etc/yum.repos.d/epel.repo"
-    centos.vm.provision 'shell', inline: 'yum install -y python-pip python-devel gcc'
-    centos.vm.provision 'shell', inline: 'pip install -q pip --upgrade'
-    centos.vm.provision 'shell', inline: 'pip install -q ansible jinja2'
-
-    centos.vm.provision 'ansible' do |ansible| 
+    centos6.vm.provision 'ansible' do |ansible| 
       ansible.playbook   = 'tests/test_vagrant.yml'
       ansible.extra_vars = {
         filebeat_user:  'root',
@@ -57,25 +65,17 @@ gpgcheck = 0
     end
   end
 
-  config.vm.define 'centos-7' do |centos|
-    EPEL_REPO = '''
-[epel]
-name     = EPEL 7 - \$basearch
-baseurl  = http://mirror.globo.com/epel/7/\$basearch
-enabled  = 1
-gpgcheck = 0
-'''
+  config.vm.define 'centos-7' do |centos7|
+    centos7.vm.box      = 'centos/7'
+    centos7.vm.hostname = 'centos-7'
 
-    centos.vm.box      = 'centos/7'
-    centos.vm.hostname = 'centos'
+    centos7.vm.provision 'shell', inline: 'yum install -y ca-certificates'
+    centos7.vm.provision 'shell', inline: "echo \"#{EPEL_REPO_7}\" > /etc/yum.repos.d/epel.repo"
+    centos7.vm.provision 'shell', inline: 'yum install -y python-pip python-devel gcc libffi-devel openssl-devel'
+    centos7.vm.provision 'shell', inline: 'pip install -q pip --upgrade'
+    centos7.vm.provision 'shell', inline: 'pip install -q ansible==1.9.4 jinja2'
 
-    centos.vm.provision 'shell', inline: 'yum install -y ca-certificates'
-    centos.vm.provision 'shell', inline: "echo \"#{EPEL_REPO}\" > /etc/yum.repos.d/epel.repo"
-    centos.vm.provision 'shell', inline: 'yum install -y python-pip python-devel gcc'
-    centos.vm.provision 'shell', inline: 'pip install -q pip --upgrade'
-    centos.vm.provision 'shell', inline: 'pip install -q ansible jinja2'
-
-    centos.vm.provision 'ansible' do |ansible| 
+    centos7.vm.provision 'ansible' do |ansible| 
       ansible.playbook = 'tests/test_vagrant.yml'
       ansible.extra_vars = {
         filebeat_user:  'root',
