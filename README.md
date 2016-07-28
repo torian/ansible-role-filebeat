@@ -99,6 +99,10 @@ filebeat_config: |
 ```
 
 FileBeat templates (a list of templates to install).
+These templates will be copied to the /etc/filebeat directory
+and can be used in the elasticsearch output for example.
+
+https://www.elastic.co/guide/en/beats/filebeat/current/elasticsearch-output.html#_template
 
     filebeat_templates: []
 
