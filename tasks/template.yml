@@ -2,11 +2,11 @@
 
 - name: Filebeat template file(s)
   copy:
-    src={{ item }}
-    dest="{{ filebeat_config_file | dirname }}/{{ item | basename }}"
-    owner="{{filebeat_user}}"
-    group="{{filebeat_group}}"
-    mode=0640
+    src: "{{ item }}"
+    dest:  "{{ filebeat_config_file | dirname }}/{{ item | basename }}"
+    owner: "{{ filebeat_user }}"
+    group: "{{ filebeat_group }}"
+    mode: 0640
   with_items: "{{ filebeat_templates }}"
   notify: filebeat restart
 
