@@ -1,12 +1,8 @@
 ---
-- name: Filebeat from url
+
+- name: Defaults
   hosts: all
   sudo: yes
-
-  vars:
-    - filebeat_use_apt_repo: false
-    - filebeat_version: '5.0.0-alpha4'
-    - filebeat_deb_baseurl: 'https://download.elastic.co/beats/filebeat'
 
   roles:
     - {
@@ -16,6 +12,27 @@
   tasks:
     - name: Filebeat version
       command: filebeat --version
+      register: r_version
+
+    - debug:
+        msg: "{{r_version.stdout}}"
+
+
+- name: Filebeat from URL
+  hosts: all
+  sudo: yes
+
+  roles:
+    - {
+        role: ansible-role-filebeat,
+        filebeat_use_apt_repo: false,
+        filebeat_version: '5.0.0-alpha4',
+        filebeat_deb_baseurl: 'https://download.elastic.co/beats/filebeat'
+      }
+
+  tasks:
+    - name: Filebeat version
+      command: filebeat.sh --version
       register: r_version
 
     - debug:

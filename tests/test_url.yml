@@ -1,5 +1,6 @@
 ---
-- hosts: localhost
+- name: Filebeat from URL
+  hosts: localhost
   remote_user: root
 
   vars:
@@ -11,5 +12,13 @@
 
   roles:
     - ansible-role-filebeat
+
+  tasks:
+    - name: Check filebeat version
+      command: filebeat.sh --version
+      register: r_version
+    
+    - debug:
+        msg: "{{r_version}}"
 
 # vi:ts=2:sw=2:et:ft=yaml

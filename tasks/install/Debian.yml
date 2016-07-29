@@ -20,10 +20,17 @@
   notify: filebeat restart
   when: filebeat_use_apt_repo
 
-- name: Install FileBeat from URL
+- name: Download FileBeat .deb
+  get_url:
+    url: "{{ filebeat_deb_baseurl }}/{{ item }}-{{ filebeat_version }}-amd64.deb"
+    dest: "/var/cache/apt/archives/{{ item }}-{{ filebeat_version }}-amd64.deb"
+  with_items: "{{ filebeat_packages }}"
+  when: not filebeat_use_apt_repo
+
+- name: Install FileBeat .deb
   apt:
-    deb="{{ filebeat_deb_baseurl }}/{{ item }}-{{ filebeat_version }}-amd64.deb"
-    state=present
+    deb: "/var/cache/apt/archives/{{ item }}-{{ filebeat_version }}-amd64.deb"
+    state: present
   with_items: "{{ filebeat_packages }}"
   notify: filebeat restart
   when: not filebeat_use_apt_repo
