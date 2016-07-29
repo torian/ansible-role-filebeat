@@ -1,10 +1,23 @@
 ---
-- hosts: all
+- name: Defaults
+  hosts: all
   sudo: yes
 
   roles:
     - {
         role: ansible-role-filebeat
+      }
+
+- name: Filebeat from URL
+  hosts: all
+  sudo: yes
+
+  roles:
+    - {
+        role: ansible-role-filebeat,
+        filebeat_use_apt_repo: false,
+        filebeat_version: '5.0.0-alpha4',
+        filebeat_deb_baseurl: 'https://download.elastic.co/beats/filebeat'
       }
 
 # vi:ts=2:sw=2:et:ft=yaml

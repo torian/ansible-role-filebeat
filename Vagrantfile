@@ -15,7 +15,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     ubuntu.vm.hostname = 'ubuntu'
     
     ubuntu.vm.provision 'shell', inline: 'apt-get update'
-    ubuntu.vm.provision 'shell', inline: 'apt-get install -y -qq  python-pip'
+    ubuntu.vm.provision 'shell', inline: 'apt-get install -y -qq  python-pip libffi-dev libssl-dev python-dev'
     ubuntu.vm.provision 'shell', inline: 'pip install ansible jinja2'
 
     ubuntu.vm.provision 'ansible' do |ansible| 
