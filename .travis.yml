@@ -19,4 +19,7 @@ script:
   - ansible-playbook tests/test_url.yml -i localhost, --syntax-check 
   - ansible-playbook tests/test_url.yml -i localhost, --connection=local --sudo
 
+  - ansible-playbook tests/test_template.yml -i localhost, --syntax-check 
+  - ansible-playbook tests/test_template.yml -i localhost, --connection=local --sudo
+
 # vi:ts=2:sw=2:et:ft=yaml

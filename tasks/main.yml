@@ -12,6 +12,10 @@
   sudo: true
   tags: filebeat_config
 
+- include: template.yml
+  sudo: true
+  tags: filebeat_template
+
 - service:
     name: filebeat
     enabled: yes
