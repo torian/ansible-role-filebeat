@@ -1,7 +1,7 @@
 ---
 
 - name: Elastic APT Key
-  apt_key: 
+  apt_key:
     state=present
     url="{{filebeat_apt_key}}"
 
@@ -11,7 +11,7 @@
     repo="deb {{filebeat_apt_repository}} stable main"
     update_cache=yes
   when: filebeat_use_apt_repo
-  
+
 - name: Install FileBeat (Debian)
   apt:
     state="{{ (filebeat_upgrade) | ternary('latest', 'present') }}"

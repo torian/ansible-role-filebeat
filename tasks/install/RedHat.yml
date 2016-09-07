@@ -13,7 +13,7 @@
     state="{{ (filebeat_upgrade) | ternary('latest', 'present') }}"
     name="{{item}}"
     update_cache=yes
-  with_items: filebeat_packages
+  with_items: "{{ filebeat_packages }}"
   notify: filebeat restart
 
 # vi:ts=2:sw=2:et:ft=yaml
