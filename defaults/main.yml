@@ -28,6 +28,8 @@ filebeat_start_at_boot: True
 #  Make sure you know what this implies.
 filebeat_upgrade: false
 
+filebeat_config_enabled: True
+
 filebeat_config_file: /etc/filebeat/filebeat.yml
 
 filebeat_config_registry_file: /var/lib/filebeat/registry
