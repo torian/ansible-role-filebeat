@@ -1,5 +1,11 @@
 # Changelog
 
+## 2016-12-19: 3.0.0
+  - Default version 5.x
+  - Updated package repositories 
+  - `filebeat_use_apt_repo` moved to `filebeat_use_repo`
+  - Support to install from url for RedHat based systems
+
 ## 2016-09-07: 2.0.0
   - As of this release, support for ansible 1.x might be dropped
   - ES templates can be copied using `filebeat_templates` dict
