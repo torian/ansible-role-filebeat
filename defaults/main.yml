@@ -91,7 +91,7 @@ filebeat_config: |
 
   {{filebeat_config_logging}}
 
-filebeat_use_apt_repo: True
+filebeat_use_repo: True
 
 # List of template files to copy 
 filebeat_templates: []
