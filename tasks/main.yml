@@ -5,14 +5,20 @@
   tags: always
 
 - include: install.yml
-  sudo: true
+  become: true
   tags: filebeat_install
 
 - include: config.yml
-  sudo: true
+  become: true
   tags: filebeat_config
+  when: filebeat_config_enabled
 
-- service:
+- include: template.yml
+  become: true
+  tags: filebeat_template
+
+- name: Ensure Filebeat is enabled and started at boot
+  service:
     name: filebeat
     enabled: yes
     state: started

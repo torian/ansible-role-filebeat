@@ -1,13 +1,7 @@
 ---
 
-filebeat_v_major: "{{filebeat_version|regex_replace('^([0-9]+)\\..*$', '\\\\1')}}"
-filebeat_v_minor: "{{filebeat_version|regex_replace('^[0-9]+\\.([0-9]+).*$', '\\\\1')}}"
-filebeat_v_patch: "{{filebeat_version|regex_replace('^[0-9]+\\.[0-9]+\\.([0-9]+)$', '\\\\1')}}"
-
-filebeat_repo_version:   "{{filebeat_v_major}}.{{ ((filebeat_v_major|int) > 1) | ternary('x', filebeat_v_minor)}}"
-
-filebeat_apt_key: https://packages.elastic.co/GPG-KEY-elasticsearch
-filebeat_apt_repository: "https://packages.elastic.co/beats/apt"
+filebeat_apt_key: "{{filebeat_gpg_key}}"
+filebeat_apt_repository: "{{filebeat_repo_baseurl}}/apt"
 
 filebeat_packages:
   - filebeat

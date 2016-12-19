@@ -12,7 +12,19 @@ filebeat_create_user: true
 
 # Filebeat version to use
 # 
-filebeat_version: 1.1.1
+filebeat_version: 5.1.1
+
+filebeat_v_major: "{{filebeat_version|regex_replace('^([0-9]+)\\..*$', '\\\\1')|int}}"
+filebeat_v_minor: "{{filebeat_version|regex_replace('^[0-9]+\\.([0-9]+).*$', '\\\\1')|int}}"
+filebeat_v_patch: "{{filebeat_version|regex_replace('^[0-9]+\\.[0-9]+\\.([0-9]+)$', '\\\\1')|int}}"
+
+filebeat_repo_version: "{{filebeat_v_major}}.x"
+
+filebeat_gpg_key: https://artifacts.elastic.co/GPG-KEY-elasticsearch
+
+filebeat_baseurl: "https://artifacts.elastic.co"
+filebeat_repo_baseurl: "{{filebeat_baseurl}}/packages/{{filebeat_repo_version}}"
+filebeat_package_baseurl: "{{filebeat_baseurl}}/downloads/beats/filebeat"
 
 # Filebeat Solaris url
 #
@@ -27,6 +39,8 @@ filebeat_start_at_boot: True
 #  This options allows package upgrades. 
 #  Make sure you know what this implies.
 filebeat_upgrade: false
+
+filebeat_config_enabled: True
 
 filebeat_config_file: /etc/filebeat/filebeat.yml
 
@@ -77,5 +91,10 @@ filebeat_config: |
 
   {{filebeat_config_logging}}
 
+filebeat_use_repo: True
+
+# List of template files to copy 
+filebeat_templates: []
 
 # vi:ts=2:sw=2:et:ft=yaml
+

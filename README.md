@@ -33,7 +33,19 @@ Create the `filebeat` user and group.
 
 FileBeat version to use.
 
-    filebeat_version: 1.1.1
+    filebeat_version: 5.1.1
+
+Make use of the FileBeat apt repo.
+
+You may use a URL to install a specific version. To do so, change 
+`filebeat_use_repo` value to `false`, then (optionally) adjust the 
+value of `filebeat_package_baseurl` (which has a default value set for you).
+
+    filebeat_use_repo: true
+
+FileBeat base URL for package download if `filebeat_use_repo: false`
+
+    filebeat_deb_baseurl: "https://artifacts.elastic.co/downloads/beats/filebeat"
 
 Start FileBeat at boot time.
 
@@ -85,6 +97,14 @@ filebeat_config: |
   {{filebeat_config_shipper}}
   {{filebeat_config_logging}}
 ```
+
+FileBeat templates (a list of templates to install).
+These templates will be copied to the /etc/filebeat directory
+and can be used in the elasticsearch output for example.
+
+https://www.elastic.co/guide/en/beats/filebeat/current/elasticsearch-output.html#_template
+
+    filebeat_templates: []
 
 ## Usage
 ```yaml

@@ -9,11 +9,17 @@ before_install:
   - sudo apt-get update -qq
 
 install:
-  - pip install ansible==1.9.4
+  - pip install ansible==2.1.1
 
 script:
   # Test functionality with default values
   - ansible-playbook tests/test_defaults.yml -i localhost, --syntax-check 
   - ansible-playbook tests/test_defaults.yml -i localhost, --connection=local --sudo
+
+  - ansible-playbook tests/test_url.yml -i localhost, --syntax-check 
+  - ansible-playbook tests/test_url.yml -i localhost, --connection=local --sudo
+
+  - ansible-playbook tests/test_template.yml -i localhost, --syntax-check 
+  - ansible-playbook tests/test_template.yml -i localhost, --connection=local --sudo
 
 # vi:ts=2:sw=2:et:ft=yaml

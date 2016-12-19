@@ -3,7 +3,7 @@
 - name: FileBeat Yum Repository
   copy:
     dest="/etc/yum.repos.d/filebeat-{{filebeat_version}}.repo"
-    content="{{filebeat_repository}}"
+    content="{{filebeat_yum_config}}"
     owner="root"
     group="root"
     mode="0644"
@@ -15,5 +15,20 @@
     update_cache=yes
   with_items: "{{filebeat_packages}}"
   notify: filebeat restart
+
+- name: Download FileBeat RPM
+  get_url:
+    url: "{{filebeat_yum_repository}}/{{item}}-{{filebeat_version}}-{{ansible_architecture}}.rpm"
+    dest: "/var/cache/yum/{{ansible_architecture}}/{{item}}-{{filebeat_version}}-{{ansible_architecture}}.rpm"
+  with_items: "{{filebeat_packages}}"
+  when: not filebeat_use_repo
+
+- name: Install FileBeat from RPM
+  apt:
+    deb: "/var/cache/yum/{{ansible_architecture}}/{{item}}-{{filebeat_version}}-{{ansible_architecture}}.rpm"
+    state: present
+  with_items: "{{filebeat_packages}}"
+  notify: filebeat restart
+  when: not filebeat_use_repo
 
 # vi:ts=2:sw=2:et:ft=yaml
