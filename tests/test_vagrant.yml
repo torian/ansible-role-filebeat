@@ -11,7 +11,7 @@
 
   tasks:
     - name: Filebeat version
-      command: filebeat --version
+      command: /usr/share/filebeat/bin/filebeat --version
       register: r_version
 
     - debug:
@@ -26,13 +26,12 @@
     - {
         role: ansible-role-filebeat,
         filebeat_use_apt_repo: false,
-        filebeat_version: '5.0.0-alpha4',
-        filebeat_deb_baseurl: 'https://download.elastic.co/beats/filebeat'
+        filebeat_version: '5.0.0',
       }
 
   tasks:
     - name: Filebeat version
-      command: filebeat.sh --version
+      command: /usr/share/filebeat/bin/filebeat --version
       register: r_version
 
     - debug:
@@ -46,7 +45,7 @@
   roles:
     - {
         role: ansible-role-filebeat,
-        filebeat_version: 1.3,
+        filebeat_version: 5.1.1,
         filebeat_templates: [ templates/filebeat.template.json ]
       }
 
