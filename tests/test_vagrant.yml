@@ -2,7 +2,7 @@
 
 - name: Defaults
   hosts: all
-  sudo: yes
+  become: yes
 
   roles:
     - {
@@ -20,7 +20,7 @@
 
 - name: Filebeat from URL
   hosts: all
-  sudo: yes
+  become: yes
 
   roles:
     - {
@@ -40,7 +40,7 @@
 
 - name: Filebeat ES Template
   hosts: all
-  sudo: yes
+  become: yes
 
   roles:
     - {

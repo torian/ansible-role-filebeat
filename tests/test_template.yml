@@ -2,7 +2,7 @@
 
 - name: Filebeat ES Template
   hosts: all
-  sudo: yes
+  become: yes
 
   roles:
     - {
