@@ -45,6 +45,25 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     
   end
 
+  config.vm.define 'ubuntu-precise' do |ubuntu_p|
+    ubuntu_p.vm.box      = 'ubuntu/precise64'
+    ubuntu_p.vm.hostname = 'ubuntu-precise'
+    
+    ubuntu_p.vm.provision 'shell', inline: 'apt-get update'
+    ubuntu_p.vm.provision 'shell', inline: 'apt-get install -y -qq  python-pip libffi-dev libssl-dev python-dev'
+    ubuntu_p.vm.provision 'shell', inline: 'pip install ansible==2.2.0.0 ansible-lint jinja2'
+
+    ubuntu_p.vm.provision 'ansible' do |ansible| 
+      ansible.playbook = 'tests/test_vagrant.yml'
+      ansible.extra_vars = {
+        filebeat_user:  'root',
+        filebeat_group: 'root',
+        filebeat_create_user: false,
+      }
+    end
+    
+  end
+
   config.vm.define 'centos-6' do |centos6|
     centos6.vm.box      = "puppetlabs/centos-6.6-64-nocm"
     centos6.vm.hostname = 'centos-6'
