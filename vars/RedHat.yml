@@ -3,7 +3,7 @@
 filebeat_yum_repository: "{{filebeat_repo_baseurl}}/yum"
 
 filebeat_yum_config: |
-  [filebeat]
+  [filebeat-{{filebeat_version}}]
   name=Filebeat repository
   baseurl={{filebeat_yum_repository}}
   gpgcheck=1

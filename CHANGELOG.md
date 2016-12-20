@@ -1,5 +1,8 @@
 # Changelog
 
+## 2016-12-20: 3.0.1
+  - RedHat yum repo name to contain version
+
 ## 2016-12-20: 3.0.0
   - Default version `5.x`
   - Updated package repositories 
