@@ -8,7 +8,7 @@ An Ansible Role that installs FileBeat on Red Hat/CentOS or Debian/Ubuntu.
 
   * EL / Centos (6 / 7)
   * Debian (Wheezy / Jessie)
-  * Ubuntu (Trusty)
+  * Ubuntu (Precise / Trusty)
   * Solaris
 
 ## Role Variables
@@ -33,7 +33,7 @@ Create the `filebeat` user and group.
 
 FileBeat version to use.
 
-    filebeat_version: 5.1.1
+    filebeat_version: 5.x
 
 Make use of the FileBeat apt repo.
 

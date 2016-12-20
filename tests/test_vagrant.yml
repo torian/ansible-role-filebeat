@@ -25,8 +25,9 @@
   roles:
     - {
         role: ansible-role-filebeat,
-        filebeat_use_apt_repo: false,
-        filebeat_version: '5.0.0',
+        filebeat_use_repo: false,
+        filebeat_version: '6.0.0-alpha1-SNAPSHOT',
+        filebeat_package_baseurl: 'https://beats-nightlies.s3.amazonaws.com/filebeat'
       }
 
   tasks:
@@ -45,7 +46,6 @@
   roles:
     - {
         role: ansible-role-filebeat,
-        filebeat_version: 5.1.1,
         filebeat_templates: [ templates/filebeat.template.json ]
       }
 

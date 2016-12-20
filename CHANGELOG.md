@@ -1,7 +1,7 @@
 # Changelog
 
-## 2016-12-19: 3.0.0
-  - Default version 5.x
+## 2016-12-20: 3.0.0
+  - Default version `5.x`
   - Updated package repositories 
   - `filebeat_use_apt_repo` moved to `filebeat_use_repo`
   - Support to install from url for RedHat based systems
