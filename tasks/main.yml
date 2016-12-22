@@ -5,16 +5,13 @@
   tags: always
 
 - include: install.yml
-  become: true
   tags: filebeat_install
 
 - include: config.yml
-  become: true
   tags: filebeat_config
   when: filebeat_config_enabled
 
 - include: template.yml
-  become: true
   tags: filebeat_template
 
 - name: Ensure Filebeat is enabled and started at boot

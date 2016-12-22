@@ -1,5 +1,8 @@
 # Changelog
 
+## 2016-12-22: 3.0.2
+  - Remove become / sudo from tasks
+
 ## 2016-12-20: 3.0.1
   - RedHat yum repo name to contain version
 
