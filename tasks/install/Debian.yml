@@ -4,6 +4,7 @@
   apt_key:
     state=present
     url="{{filebeat_gpg_key}}"
+    when: filebeat_use_repo
 
 - name : FileBeat APT Repository
   apt_repository:
