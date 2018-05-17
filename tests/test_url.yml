@@ -7,7 +7,7 @@
     - fbeat_user:  root
     - fbeat_group: root
     - filebeat_use_repo: false
-    - filebeat_version: 6.2.3
+    - filebeat_version: 6.2.4
 
   roles:
     - ansible-role-filebeat
