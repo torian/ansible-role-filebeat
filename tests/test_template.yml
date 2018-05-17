@@ -7,7 +7,7 @@
   roles:
     - {
         role: ansible-role-filebeat,
-        filebeat_version: '5.5.6'
+        filebeat_version: '5.5.6',
         filebeat_templates: [ templates/filebeat.template.json ]
       }
 
