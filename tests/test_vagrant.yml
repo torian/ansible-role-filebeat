@@ -53,9 +53,8 @@
 
     - name: Uninstall previous filebeat version
       apt:
-        name: "{{ item }}"
+        name: 'filebeat'
         state: absent
-      with_items: "{{ filebeat_packages }}"
 
   tasks:
 
