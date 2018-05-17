@@ -7,8 +7,7 @@
     - fbeat_user:  root
     - fbeat_group: root
     - filebeat_use_repo: false
-    - filebeat_version: 6.0.0-alpha1-SNAPSHOT
-    - filebeat_package_baseurl: 'https://beats-nightlies.s3.amazonaws.com/filebeat'
+    - filebeat_version: 6.2.3
 
   roles:
     - ansible-role-filebeat
