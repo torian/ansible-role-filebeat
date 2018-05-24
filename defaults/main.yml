@@ -47,6 +47,7 @@ filebeat_config_registry_file: /var/lib/filebeat/registry
 #   - filebeat_config_prospectors
 #   - filebeat_config_output
 #   - filebeat_config_setup
+#   - filebeat_config_processors: |
 #   - filebeat_config_shipper
 #   - filebeat_config_logging
 #
@@ -69,6 +70,9 @@ filebeat_config_output: |
 filebeat_config_setup: |
   setup:
 
+filebeat_config_processors: |
+  processors:
+
 filebeat_config_shipper: |
   shipper:
 
@@ -85,6 +89,8 @@ filebeat_config: |
   {{filebeat_config_output}}
 
   {{filebeat_config_setup}}
+
+  {{filebeat_config_processors}}
 
   {{filebeat_config_shipper}}
 
