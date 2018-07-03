@@ -15,7 +15,7 @@
   pre_tasks:
 
     - name: Uninstall previous filebeat version
-      apt:
+      package:
         name: 'filebeat'
         state: absent
 
