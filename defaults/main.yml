@@ -11,14 +11,18 @@ filebeat_group: root
 filebeat_create_user: true
 
 # Filebeat version to use
-# 
-filebeat_version: 6.x
+#  The package repository is build upon major and minor versions
+#
+filebeat_version: 6.3.0
+filebeat_version_repo: "{{filebeat_version|regex_replace('^([0-9]+)\\..*$', '\\1')}}.x"
 
 filebeat_gpg_key: https://artifacts.elastic.co/GPG-KEY-elasticsearch
 
-filebeat_baseurl: "https://artifacts.elastic.co"
-filebeat_repo_baseurl: "{{filebeat_baseurl}}/packages/{{filebeat_version}}"
+filebeat_baseurl:         "https://artifacts.elastic.co"
+filebeat_repo_baseurl:    "{{filebeat_baseurl}}/packages/{{filebeat_version_repo}}"
 filebeat_package_baseurl: "{{filebeat_baseurl}}/downloads/beats/filebeat"
+
+filebeat_arch: "{{ (ansible_architecture == 'x86_64') | ternary('amd64', 'i386') }}"
 
 # Filebeat Solaris url
 #
