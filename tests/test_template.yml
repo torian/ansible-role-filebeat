@@ -7,8 +7,17 @@
   roles:
     - {
         role: ansible-role-filebeat,
+        filebeat_version: '5.6.9',
+        filebeat_use_repo: false,
         filebeat_templates: [ templates/filebeat.template.json ]
       }
+
+  pre_tasks:
+
+    - name: Uninstall previous filebeat version
+      apt:
+        name: 'filebeat'
+        state: absent
 
   tasks:
 

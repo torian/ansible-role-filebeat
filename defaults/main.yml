@@ -12,7 +12,7 @@ filebeat_create_user: true
 
 # Filebeat version to use
 # 
-filebeat_version: 5.x
+filebeat_version: 6.x
 
 filebeat_gpg_key: https://artifacts.elastic.co/GPG-KEY-elasticsearch
 
@@ -46,6 +46,8 @@ filebeat_config_registry_file: /var/lib/filebeat/registry
 #
 #   - filebeat_config_prospectors
 #   - filebeat_config_output
+#   - filebeat_config_setup
+#   - filebeat_config_processors: |
 #   - filebeat_config_shipper
 #   - filebeat_config_logging
 #
@@ -65,6 +67,11 @@ filebeat_config_output: |
     elasticsearch:
       hosts: [ 'localhost:9200' ]
 
+filebeat_config_setup: |
+  setup:
+
+filebeat_config_processors: |
+  processors:
 
 filebeat_config_shipper: |
   shipper:
@@ -81,14 +88,21 @@ filebeat_config: |
 
   {{filebeat_config_output}}
 
+  {{filebeat_config_setup}}
+
+  {{filebeat_config_processors}}
+
   {{filebeat_config_shipper}}
 
   {{filebeat_config_logging}}
 
 filebeat_use_repo: True
 
-# List of template files to copy 
+# List of template files to copy < 6.0
 filebeat_templates: []
+
+# path to the fields mapping file (setup.template.fields) >= 6.0
+filebeat_fields_template: False
 
 # vi:ts=2:sw=2:et:ft=yaml
 

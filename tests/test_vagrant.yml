@@ -26,8 +26,7 @@
     - {
         role: ansible-role-filebeat,
         filebeat_use_repo: false,
-        filebeat_version: '6.0.0-alpha1-SNAPSHOT',
-        filebeat_package_baseurl: 'https://beats-nightlies.s3.amazonaws.com/filebeat'
+        filebeat_version: '6.2.4'
       }
 
   tasks:
@@ -46,13 +45,23 @@
   roles:
     - {
         role: ansible-role-filebeat,
+        filebeat_use_repo: false,
+        filebeat_version: '5.6.9'
         filebeat_templates: [ templates/filebeat.template.json ]
       }
+
+  pre_tasks:
+
+    - name: Uninstall previous filebeat version
+      apt:
+        name: 'filebeat'
+        state: absent
 
   tasks:
 
     - name: Check filebeat ES template
-      stat: path=/etc/filebeat/filebeat.template.json
+      stat:
+        path: '/etc/filebeat/filebeat.template.json'
       register: f
 
     - name: Assert that the ES template exists
