@@ -7,7 +7,7 @@
       state: present
       url:   "{{filebeat_gpg_key}}"
 
-  - name : FileBeat APT Repository
+  - name: FileBeat APT Repository
     apt_repository:
       state: present
       repo:  "deb {{filebeat_apt_repository}} stable main"
