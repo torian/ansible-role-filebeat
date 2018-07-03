@@ -1,12 +1,14 @@
 ---
 
-- name: Defaults
+- name: Install Filebeat from URL
   hosts: all
   become: yes
 
   roles:
     - {
         role: ansible-role-filebeat,
+        filebeat_use_repo: false,
+        filebeat_version: 6.0.0
       }
 
   tasks:
@@ -18,15 +20,13 @@
         msg: "{{r_version.stdout}}"
 
 
-- name: Filebeat from URL
+- name: Defaults
   hosts: all
   become: yes
 
   roles:
     - {
-        role: ansible-role-filebeat,
-        filebeat_use_repo: false,
-        filebeat_version: '6.2.4'
+        role: ansible-role-filebeat
       }
 
   tasks:
@@ -46,14 +46,14 @@
     - {
         role: ansible-role-filebeat,
         filebeat_use_repo: false,
-        filebeat_version: '5.6.9'
+        filebeat_version: '5.6.9',
         filebeat_templates: [ templates/filebeat.template.json ]
       }
 
   pre_tasks:
 
     - name: Uninstall previous filebeat version
-      apt:
+      package:
         name: 'filebeat'
         state: absent
 

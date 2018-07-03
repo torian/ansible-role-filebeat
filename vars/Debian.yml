@@ -1,9 +1,9 @@
 ---
 
-filebeat_apt_key: "{{filebeat_gpg_key}}"
 filebeat_apt_repository: "{{filebeat_repo_baseurl}}/apt"
 
-filebeat_packages:
-  - filebeat
+filebeat_package:        "filebeat={{filebeat_version}}"
+
+filebeat_package_url:    "{{filebeat_package_baseurl}}/filebeat-{{filebeat_version}}-{{filebeat_arch}}.deb"
 
 # vi:ts=2:sw=2:et:ft=yaml

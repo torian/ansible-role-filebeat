@@ -1,5 +1,12 @@
 # Changelog
 
+## 2018-07-03: 6.0.0
+  - Role version to match major filebeat releases
+  - Install specific filebeat version from a repository
+  - New config section `setup`
+  - Add processors
+  - Drop vagrant tests for Ubuntu precise
+
 ## 2016-12-22: 3.0.2
   - Remove become / sudo from tasks
 

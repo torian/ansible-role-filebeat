@@ -10,8 +10,9 @@ filebeat_yum_config: |
   gpgkey={{filebeat_gpg_key}}
   enabled=1
 
-filebeat_packages:
-  - filebeat
+filebeat_package: "filebeat-{{filebeat_version}}"
+
+filebeat_package_url: "{{filebeat_package_baseurl}}/filebeat-{{filebeat_version}}-{{ansible_architecture}}.rpm"
 
 #filebeat_defaults_cfg: /etc/sysconfig/filebeat
 
