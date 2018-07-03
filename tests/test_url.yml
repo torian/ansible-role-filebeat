@@ -9,6 +9,12 @@
     - filebeat_use_repo: false
     - filebeat_version: 6.2.4
 
+  pre_tasks:
+    - name: Uninstall previous filebeat version
+      package:
+        name: 'filebeat'
+        state: absent
+
   roles:
     - ansible-role-filebeat
 
