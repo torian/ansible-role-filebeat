@@ -13,7 +13,7 @@ filebeat_create_user: true
 # Filebeat version to use
 #  The package repository is build upon major and minor versions
 #
-filebeat_version: 6.3.0
+filebeat_version: 6.4.0
 filebeat_version_repo: "{{filebeat_version|regex_replace('^([0-9]+)\\..*$', '\\1')}}.x"
 
 filebeat_gpg_key: https://artifacts.elastic.co/GPG-KEY-elasticsearch
@@ -48,23 +48,27 @@ filebeat_config_registry_file: /var/lib/filebeat/registry
 #  The configuratlion is built based on a single variable, in YAML format, filebeat_config.
 #  Just for fun and example, it has been splitted into multiple vars:
 #
-#   - filebeat_config_prospectors
+#   - filebeat_config_inputs
+#   - filebeat_config_modules
+#   - filebeat_config_config
 #   - filebeat_config_output
 #   - filebeat_config_setup
-#   - filebeat_config_processors: |
-#   - filebeat_config_shipper
+#   - filebeat_config_processors:
 #   - filebeat_config_logging
 #
 
-filebeat_config_prospectors: |
-  filebeat:
-    prospectors:
+filebeat_config_inputs: |
+  filebeat.inputs:
       -
-        input_type: log
+        type: log
         paths:
           - /var/log/*.log
-        registry_file: "{{filebeat_config_registry_file}}"
 
+filebeat_config_modules: |
+  filebeat.modules:
+
+filebeat_config_config: |
+  filebeat.config:
 
 filebeat_config_output: |
   output:
@@ -77,18 +81,18 @@ filebeat_config_setup: |
 filebeat_config_processors: |
   processors:
 
-filebeat_config_shipper: |
-  shipper:
-
-
 filebeat_config_logging: |
   logging:
     files:
       rotateeverybytes: 10485760 # = 10MB
 
-
 filebeat_config: |
-  {{filebeat_config_prospectors}}
+  filebeat.registry_file: "{{filebeat_config_registry_file}}"
+  {{filebeat_config_inputs}}
+
+  {{filebeat_config_modules}}
+
+  {{filebeat_config_config}}
 
   {{filebeat_config_output}}
 
@@ -96,16 +100,14 @@ filebeat_config: |
 
   {{filebeat_config_processors}}
 
-  {{filebeat_config_shipper}}
-
   {{filebeat_config_logging}}
 
 filebeat_use_repo: True
 
-# List of template files to copy < 6.0
+# List of template files to copy (setup.template.json)
 filebeat_templates: []
 
-# path to the fields mapping file (setup.template.fields) >= 6.0
+# path to the fields mapping file (setup.template.fields)
 filebeat_fields_template: False
 
 # vi:ts=2:sw=2:et:ft=yaml

@@ -7,7 +7,7 @@
     - fbeat_user:  root
     - fbeat_group: root
     - filebeat_use_repo: false
-    - filebeat_version: 6.2.4
+    - filebeat_version: 6.4.0
 
   pre_tasks:
     - name: Uninstall previous filebeat version

@@ -1,5 +1,12 @@
 # Changelog
 
+## 2018-09-05: 6.4.0
+  - Remove shipper section
+  - Rename prospector to inputs
+  - Add modules section
+  - Add config section
+  - Adjust template tests to run with >= 6.4
+
 ## 2018-07-03: 6.0.0
   - Role version to match major filebeat releases
   - Install specific filebeat version from a repository
