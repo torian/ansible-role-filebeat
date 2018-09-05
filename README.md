@@ -101,6 +101,8 @@ filebeat_config_logging: |
 filebeat_config: |
   filebeat.registry_file: "{{filebeat_config_registry_file}}"
   {{filebeat_config_inputs}}
+  {{filebeat_config_modules}}
+  {{filebeat_config_config}}
   {{filebeat_config_output}}
   {{filebeat_config_setup}}
   {{filebeat_config_processors}}
