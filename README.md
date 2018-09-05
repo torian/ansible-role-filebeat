@@ -33,7 +33,7 @@ Create the `filebeat` user and group.
 
 FileBeat version to use.
 
-    filebeat_version: 6.3.0
+    filebeat_version: 6.4.0
 
 Make use of the FileBeat apt repo.
 
@@ -67,35 +67,45 @@ The FileBeat configuration is built based on the variable `filebeat_config`.
 For easier management of the contents, the `filebeat_config` variable is made
 up of multiple other variables:
 
-* `filebeat_config_prospectors`
+* `filebeat_config_inputs`
+* `filebeat_config_modules`
+* `filebeat_config_config`
 * `filebeat_config_output`
-* `filebeat_config_shipper`
+* `filebeat_config_setup`
+* `filebeat_config_processors`
 * `filebeat_config_logging`
 
 ```yaml
-filebeat_config_prospectors: |
-  filebeat:
-    prospectors:
+filebeat_config_inputs: |
+  filebeat.inputs:
       -
-        input_type: log
+        type: log
         paths:
           - /var/log/*.log
-        registry_file: "{{filebeat_config_registry_file}}"
+filebeat_config_modules: |
+  filebeat.modules:
+filebeat_config_config: |
+  filebeat.config:
 filebeat_config_output: |
   output:
     elasticsearch:
       hosts: [ 'localhost:9200' ]
-filebeat_config_shipper: |
-  shipper:
+filebeat_config_setup: |
+  setup:
+filebeat_config_processors: |
+  processors:
 filebeat_config_logging: |
   logging:
     files:
       rotateeverybytes: 10485760 # = 10MB
 filebeat_config: |
-  {{filebeat_config_prospectors}}
+  filebeat.registry_file: "{{filebeat_config_registry_file}}"
+  {{filebeat_config_inputs}}
   {{filebeat_config_output}}
-  {{filebeat_config_shipper}}
+  {{filebeat_config_setup}}
+  {{filebeat_config_processors}}
   {{filebeat_config_logging}}
+
 ```
 
 FileBeat templates (a list of templates to install).
