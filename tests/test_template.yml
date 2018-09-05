@@ -7,9 +7,13 @@
   roles:
     - {
         role: ansible-role-filebeat,
-        filebeat_version: '5.6.9',
+        filebeat_version: '6.4.0',
         filebeat_use_repo: false,
         filebeat_templates: [ templates/filebeat.template.json ]
+        filebeat_config_setup:
+          setup.template.json.enabled: true
+          setup.template.json.path: "filebeat.template.json"
+          setup.template.json.name: "filebeat"
       }
 
   pre_tasks:
