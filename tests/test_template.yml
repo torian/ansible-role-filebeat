@@ -5,8 +5,8 @@
   become: yes
 
   vars:
-    filebeat_version: '6.4.0',
-    filebeat_use_repo: false,
+    filebeat_version: '6.4.0'
+    filebeat_use_repo: false
     filebeat_templates: [ templates/filebeat.template.json ]
     filebeat_config_setup: |
       setup.template.json.enabled: true
