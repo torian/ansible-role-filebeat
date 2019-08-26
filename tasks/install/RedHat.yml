@@ -4,8 +4,8 @@
 
   - name: FileBeat Yum Repository
     copy:
-      dest:    "/etc/yum.repos.d/filebeat-{{filebeat_version}}.repo"
-      content: "{{filebeat_yum_config}}"
+      dest:    "/etc/yum.repos.d/filebeat-{{ filebeat_version }}.repo"
+      content: "{{ filebeat_yum_config }}"
       owner:   "root"
       group:   "root"
       mode:    "0644"
@@ -13,7 +13,7 @@
   - name: Install FileBeat (RedHat)
     yum:
       state: "{{ (filebeat_upgrade) | ternary('latest', 'present') }}"
-      name: "{{filebeat_package}}"
+      name: "{{ filebeat_package }}"
       update_cache: yes
     notify: filebeat restart
 
@@ -23,13 +23,13 @@
 
   - name: Download FileBeat RPM
     get_url:
-      url: "{{filebeat_package_url}}"
-      dest: "/var/cache/yum/{{ansible_architecture}}/filebeat-{{filebeat_version}}-{{ansible_architecture}}.rpm"
+      url: "{{ filebeat_package_url }}"
+      dest: "/var/cache/yum/{{ ansible_architecture }}/filebeat-{{ filebeat_version }}-{{ ansible_architecture }}.rpm"
 
   - name: Install FileBeat from RPM
     yum:
       state: present
-      name: "/var/cache/yum/{{ansible_architecture}}/filebeat-{{filebeat_version}}-{{ansible_architecture}}.rpm"
+      name: "/var/cache/yum/{{ ansible_architecture }}/filebeat-{{ filebeat_version }}-{{ ansible_architecture }}.rpm"
     notify: filebeat restart
 
   when: not filebeat_use_repo

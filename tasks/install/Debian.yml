@@ -5,18 +5,18 @@
   - name: Elastic APT Key
     apt_key:
       state: present
-      url:   "{{filebeat_gpg_key}}"
+      url:   "{{ filebeat_gpg_key }}"
 
   - name: FileBeat APT Repository
     apt_repository:
       state: present
-      repo:  "deb {{filebeat_apt_repository}} stable main"
+      repo:  "deb {{ filebeat_apt_repository }} stable main"
       update_cache: yes
 
   - name: Install FileBeat (Debian)
     apt:
       state: "{{ (filebeat_upgrade) | ternary('latest', 'present') }}"
-      name: "{{filebeat_package}}"
+      name: "{{ filebeat_package }}"
     notify: filebeat restart
 
   when: filebeat_use_repo
@@ -25,12 +25,12 @@
 
   - name: Download FileBeat DEB
     get_url:
-      url: "{{filebeat_package_url}}"
-      dest: "/var/cache/apt/archives/filebeat-{{filebeat_version}}-amd64.deb"
+      url: "{{ filebeat_package_url }}"
+      dest: "/var/cache/apt/archives/filebeat-{{ filebeat_version }}-amd64.deb"
 
   - name: Install FileBeat DEB
     apt:
-      deb: "/var/cache/apt/archives/filebeat-{{filebeat_version}}-amd64.deb"
+      deb: "/var/cache/apt/archives/filebeat-{{ filebeat_version }}-amd64.deb"
       state: present
     notify: filebeat restart
 

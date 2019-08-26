@@ -22,7 +22,8 @@
     state: present
 
 - name: filebeat | Install Filebeat service
-  shell: (svccfg import /opt/filebeat/etc/filebeat.xml) && (svcs | grep filebeat) > /opt/filebeat/service.created
+  shell: |
+    set -eo pipefail (svccfg import /opt/filebeat/etc/filebeat.xml) && (svcs | grep filebeat) > /opt/filebeat/service.created
   args:
     creates: /opt/filebeat/service.created
   when: filebeat_start_at_boot
