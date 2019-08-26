@@ -8,7 +8,7 @@
     group: "{{ filebeat_group }}"
     mode: 0640
   with_items: "{{ filebeat_templates }}"
-  when:  filebeat_version is version('6.0', '<') 
+  when:  filebeat_version is version('6.0', '<')
   notify: filebeat restart
 
 - name: Filebeat fields template
